@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python src/data/get_data.py params.yaml
+    deps:
+    - path: params.yaml
+      hash: md5
+      md5: b6149d4866e26973c52688e9dbbfedb3
+      size: 1298
+    - path: src/data/get_data.py
+      hash: md5
+      md5: 07ce6cc0803000866ddd672c1d9be30b
+      size: 1429
+    outs:
+    - path: data/raw_data/raw.csv
+      hash: md5
+      md5: 076ef13ee7a9bf9dd021560d1f4084c3
+      size: 330716
+  split:
+    cmd: python src/data/split.py params.yaml
+    deps:
+    - path: data/raw_data/raw.csv
+      hash: md5
+      md5: 076ef13ee7a9bf9dd021560d1f4084c3
+      size: 330716
+    - path: params.yaml
+      hash: md5
+      md5: b6149d4866e26973c52688e9dbbfedb3
+      size: 1298
+    - path: src/data/split.py
+      hash: md5
+      md5: 58a37f0e13ae76fa9fa4dea646d2e0b6
+      size: 2256
+    outs:
+    - path: data/processed_data/X_test.csv
+      hash: md5
+      md5: f0f950fa87af7b8101f12ef2edd0b196
+      size: 59902
+    - path: data/processed_data/X_train.csv
+      hash: md5
+      md5: 8b182e996e777cfc33f76a677928c5b4
+      size: 238468
+    - path: data/processed_data/y_test.csv
+      hash: md5
+      md5: 70968fa4615f00f21dcc604a25be2da3
+      size: 6452
+    - path: data/processed_data/y_train.csv
+      hash: md5
+      md5: 5f8aa77e7118c62359074ed355041f85
+      size: 25946

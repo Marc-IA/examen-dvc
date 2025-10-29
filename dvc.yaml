@@ -1,0 +1,19 @@
+stages:
+  get_data:
+    cmd: python src/data/get_data.py params.yaml
+    deps:
+    - params.yaml
+    - src/data/get_data.py
+    outs:
+    - data/raw_data/raw.csv
+  split:
+    cmd: python src/data/split.py params.yaml
+    deps:
+    - data/raw_data/raw.csv
+    - params.yaml
+    - src/data/split.py
+    outs:
+    - data/processed_data/X_test.csv
+    - data/processed_data/X_train.csv
+    - data/processed_data/y_test.csv
+    - data/processed_data/y_train.csv
