@@ -1,0 +1,59 @@
+# =========================
+# PARAMÈTRES GLOBAUX DVC
+# =========================
+
+data:
+  url: "https://datascientest-mlops.s3.eu-west-1.amazonaws.com/mlops_dvc_fr/raw.csv"
+  target: "silica_concentrate"
+
+split:
+  test_size: 0.2
+  random_state: 42
+  shuffle: true
+
+scale:
+  with_mean: true
+  with_std: true
+
+model:
+  type: "RandomForestRegressor"
+  random_state: 42
+
+grid:
+  n_estimators: [100, 200, 300]
+  max_depth: [null, 5, 10]
+  min_samples_split: [2, 5]
+  min_samples_leaf: [1, 2]
+
+train:
+  n_jobs: -1
+
+evaluate:
+  metrics:
+    - mse
+    - mae
+    - r2
+  save_predictions: true
+  output_metrics: "metrics/scores.json"
+  output_predictions: "data/processed_data/predictions.csv"
+  round_digits: 4
+
+paths:
+  # Données brutes et transformées
+  raw_csv: "data/raw_data/raw.csv"
+  x_train: "data/processed_data/X_train.csv"
+  x_test: "data/processed_data/X_test.csv"
+  y_train: "data/processed_data/y_train.csv"
+  y_test: "data/processed_data/y_test.csv"
+
+  # Données normalisées
+  x_train_scaled: "data/processed_data/X_train_scaled.csv"
+  x_test_scaled: "data/processed_data/X_test_scaled.csv"
+
+  # Modèle et hyperparamètres
+  best_params: "models/best_params.pkl"
+  model: "models/model.pkl"
+
+  # Résultats
+  preds: "data/processed_data/predictions.csv"
+  scores: "metrics/scores.json"
