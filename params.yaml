@@ -20,6 +20,8 @@ model:
   random_state: 42
 
 grid:
+  scoring: "r2"       # métrique utilisée pour choisir le meilleur modèle
+  cv: 3               # validation croisée à 3 plis
   n_estimators: [100, 200, 300]
   max_depth: [null, 5, 10]
   min_samples_split: [2, 5]

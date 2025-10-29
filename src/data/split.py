@@ -37,6 +37,11 @@ def main(params_path: str = "params.yaml") -> None:
     df = pd.read_csv(raw_path)
     print(f"Lecture du dataset : {raw_path.name} ({df.shape[0]} lignes)")
 
+    # Supprimer la colonne 'date' si elle existe
+    if "date" in df.columns:
+        print("Suppression de la colonne 'date' : non utilisée pour la modélisation.")
+        df = df.drop(columns=["date"])
+
     # Séparation features / target
     X = df.drop(columns=[target_col])
     y = df[target_col]
